@@ -10,6 +10,11 @@ right_links:
   #   link: https://facebook.com/cloudcannon
   #   new_window: true
   #   social_icon: Facebook
+
+   - name: Google Scholar
+    link: https://scholar.google.com/citations?hl=en&user=-8ivKLEAAAAJ
+    social_icon: Email
+    new_window: true
   - name:
     link: https://twitter.com/dz_gong
     social_icon: Twitter
