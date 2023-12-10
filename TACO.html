@@ -8,7 +8,7 @@ image: /photos/TACO_cell.jpg
 	<div class="inner-hero text-container">
 		<div class="hero-text-container">
 			<h1 class="editable">TACO</h1>
-			<p class="subtext editable">Tandem Aberration Correction Optics (TACO) system for high quality super-resolution SIM imaging through strong aberrative medium.</p>
+			<p class="subtext editable">Tandem Aberration Correction Optics (TACO) system for high quality super-resolution SIM imaging through strong aberrating medium.</p>
 			<p class="subtext editable"><a href="/papers/Gong and Scherer - 2023 - Tandem aberration correction optics (TACO) in wide.pdf">Read full paper</a>
 			</p>
 		</div>
@@ -21,7 +21,7 @@ image: /photos/TACO_cell.jpg
 		<div class="container flex">
 			<div class="text">
 				<h2 class="editable">TACO - setup</h2>
-				<p class="editable">TACO system incorporates a deformable mirror (DM) in the detection path as a classic pupil adaptive optics (AO) component to correct for global aberrations, while a spatial light modulatior (SLM) is used for conjugate AO in the illumination path to compensate for the long neglecated local-variant aberrations. </p>
+				<p class="editable">TACO system is designed for correcting the different types of aberrations of Structured Illumination Microscopy (SIM) separately. TACO incorporates a spatial light modulatior (SLM) for conjugate adaptive optics (AO) in the illumination path to compensate for the long neglecated local-variant aberrations in SIM illumination, while a deformable mirror (DM) is implemented in the detection path as a classic pupil adaptive optics (AO) component to correct for global aberrations. </p>
 			</div>
 			<div class="image">
 				<img class="editable" src="/photos/TACO_setup.jpg" alt="TACO_setup" />
@@ -32,8 +32,8 @@ image: /photos/TACO_cell.jpg
 	<section class="info">
 		<div class="container flex">
 			<div class="text">
-				<h2 class="editable">Conjugate Adaptive Optics</h2>
-				<p class="editable">The more you tell Frisco the better it gets to know you. Frisco matches you with people who share similar interests with you.</p>
+				<h2 class="editable">Conjugate AO</h2>
+				<p class="editable">The sinusoidal pattern of SIM illumination is known to be "immune" to global aberrations (spherical aberration, coma, etc), but suffers from spatial-variant aberrations. TACO utilizes an stochastic paralleled gradient descent (SPGD) based algorithm to optimize the phase modulation of the SLM at the conjugate plane of the illumination and counteracts the spatially varying distortions of SIM pattern, achieving high quality SIM illumination pattern even through strongly aberrating medium.</p>
 			</div>
 			<div class="image">
 				<img class="editable" src="/photos/TACO_conjugate.gif" alt="TACO_pattern" />
@@ -44,8 +44,8 @@ image: /photos/TACO_cell.jpg
 	<section class="info">
 		<div class="container flex">
 			<div class="text">
-				<h2 class="editable">Pupil Adaptive Optics</h2>
-				<p class="editable">The more you tell Frisco the better it gets to know you. Frisco matches you with people who share similar interests with you.</p>
+				<h2 class="editable">Pupil AO</h2>
+				<p class="editable">TACO further utilizes a DM to do Zernike-polynomial based pupil AO in the detection path of SIM to correct for all the possible global aberrations such as spherical aberation, coma, astigmatism. </p>
 			</div>
 			<div class="image">
 				<img class="editable" src="/photos/TACO_pupil.gif" alt="TACO_pattern" />
@@ -56,8 +56,8 @@ image: /photos/TACO_cell.jpg
 	<section class="info">
 		<div class="container flex">
 			<div class="text">
-				<h2 class="editable">TACO SIM</h2>
-				<p class="editable">The more you tell Frisco the better it gets to know you. Frisco matches you with people who share similar interests with you.</p>
+				<h2 class="editable">TACO-SIM imaging</h2>
+				<p class="editable">With the aberration correction by TACO, high quality SIM imaging can be achieved even through strongly aberrating medium, allowing for super-resolution imaging in both lateral and axial directions with high fidelity and robustness.</p>
 			</div>
 			<div class="image">
 				<img class="editable" src="/photos/TACO_cell.gif" alt="TACO_pattern" />
