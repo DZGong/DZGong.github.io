@@ -1,10 +1,10 @@
 left_links:
   - name: TACO
-    link: /blog/
+    link: /TACO/
   - name: gDMD-SIM
-    link: /about/
+    link: /gDMD-SIM/
   - name: Upcoming
-    link: /contact/
+    link: /Upcoming/
 right_links:
   # - name:
   #   link: https://facebook.com/cloudcannon
