@@ -3,8 +3,8 @@ left_links:
     link: /TACO/
   - name: gDMD-SIM
     link: /gDMD-SIM/
-  - name: Upcoming
-    link: /Upcoming/
+  - name: Snapshot-MD-SIM
+    link: /Snapshot-MD-SIM/
 right_links:
   # - name:
   #   link: https://facebook.com/cloudcannon
