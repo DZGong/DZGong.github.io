@@ -5,6 +5,8 @@ left_links:
     link: /gDMD-SIM/
   - name: Snapshot-MD-SIM
     link: /Snapshot-MD-SIM/
+  - name: VMAP
+    link: /VMAP/
 right_links:
   # - name:
   #   link: https://facebook.com/cloudcannon
