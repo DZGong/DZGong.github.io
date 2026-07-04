@@ -67,3 +67,78 @@ nav {
 	}
 
 }
+
+// Dropdown ("PhD work") — hover-to-open on desktop, expanded list on mobile.
+.nav-dropdown {
+	display: none;                       // mobile, nav closed: hidden like the other links
+
+	@media #{$mid-point} {
+		display: inline-block;           // desktop: always visible
+		position: relative;
+	}
+}
+
+.nav-open .nav-dropdown {
+	display: block;                      // mobile, nav open: shown
+
+	@media #{$mid-point} {
+		display: inline-block;
+	}
+}
+
+.nav-dropdown-toggle {
+	cursor: pointer;
+
+	.caret {
+		font-size: .8em;
+		display: none;                   // hide caret on mobile (list is always expanded there)
+
+		@media #{$mid-point} {
+			display: inline;
+		}
+	}
+}
+
+.nav-dropdown-menu {
+	@media #{$mid-point} {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 190px;
+		display: none;                   // hidden until the parent is hovered
+		padding: 5px 0;
+		background-color: rgba(255, 255, 255, .98);
+		box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+		z-index: 10000;
+	}
+
+	a {
+		@media #{$mid-point} {
+			display: block;
+			margin: 0;
+			padding: 10px 20px;
+			color: #333 !important;      // dark text on the white menu, regardless of header state
+			white-space: nowrap;
+
+			&:hover {
+				background-color: rgba(0, 0, 0, .06);
+				border: 0;
+			}
+		}
+	}
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+	@media #{$mid-point} {
+		display: block;
+	}
+}
+
+// Mobile: indent the sub-items to show they sit under "PhD work".
+.nav-open nav .nav-dropdown-menu a {
+	padding-left: 40px;
+
+	@media #{$mid-point} {
+		padding-left: 20px;
+	}
+}

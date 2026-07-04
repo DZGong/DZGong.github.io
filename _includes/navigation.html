@@ -1,14 +1,35 @@
 <nav>
 	<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
 	{% for link in site.data.navigation %}
-		{% assign class = "" %}
-		{% if link.highlight %}
-			{% assign class = class | append: " highlight" %}
-		{% endif %}
+		{% if link.sublinks %}
+			{% assign parent_class = "" %}
+			{% for sublink in link.sublinks %}
+				{% if sublink.link == page.url %}
+					{% assign parent_class = "active" %}
+				{% endif %}
+			{% endfor %}
+			<div class="nav-dropdown">
+				<a class="nav-dropdown-toggle {{ parent_class }}">{{ link.name }} <span class="caret">&#x25BE;</span></a>
+				<div class="nav-dropdown-menu">
+					{% for sublink in link.sublinks %}
+						{% assign subclass = "" %}
+						{% if sublink.link == page.url %}
+							{% assign subclass = "active" %}
+						{% endif %}
+						<a href="{% include relative-src.html src=sublink.link %}" class="{{ subclass }}">{{ sublink.name }}</a>
+					{% endfor %}
+				</div>
+			</div>
+		{% else %}
+			{% assign class = "" %}
+			{% if link.highlight %}
+				{% assign class = class | append: " highlight" %}
+			{% endif %}
 
-		{% if link.link == page.url %}
-			{% assign class = class | append: " active" %}
+			{% if link.link == page.url %}
+				{% assign class = class | append: " active" %}
+			{% endif %}
+			<a href="{% include relative-src.html src=link.link %}" class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
 		{% endif %}
-		<a href="{% include relative-src.html src=link.link %}" class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
 	{% endfor %}
 </nav>

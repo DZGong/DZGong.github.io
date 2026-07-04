@@ -1,8 +1,10 @@
-- name: TACO
-  link: /TACO/
-- name: gDMD-SIM
-  link: /gDMD-SIM/
-- name: Snapshot-MD-SIM
-  link: /Snapshot-MD-SIM/
+- name: PhD work
+  sublinks:
+    - name: TACO
+      link: /TACO/
+    - name: gDMD-SIM
+      link: /gDMD-SIM/
+    - name: Snapshot-MD-SIM
+      link: /Snapshot-MD-SIM/
 - name: VMAP
   link: /VMAP/
