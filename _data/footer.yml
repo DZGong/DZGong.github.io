@@ -1,12 +1,18 @@
 left_links:
-  - name: TACO
-    link: /TACO/
-  - name: gDMD-SIM
-    link: /gDMD-SIM/
-  - name: Snapshot-MD-SIM
-    link: /Snapshot-MD-SIM/
-  - name: VMAP
-    link: /VMAP/
+- name: VMAP
+  link: /VMAP/
+- name: Cokecan
+  link: /Cokecan/
+- name: GEVIBench
+  link: https://gevibench.org 
+- name: PhD work
+  sublinks:
+    - name: TACO
+      link: /TACO/
+    - name: gDMD-SIM
+      link: /gDMD-SIM/
+    - name: Snapshot-MD-SIM
+      link: /Snapshot-MD-SIM/
 right_links:
   # - name:
   #   link: https://facebook.com/cloudcannon

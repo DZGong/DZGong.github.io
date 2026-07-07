@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'jekyll', '3.8.4'
+# Pin ffi to the last release supporting Ruby 2.6 (1.17+ needs Ruby >= 3.0),
+# so its native extension builds locally on modern macOS.
+gem 'ffi', '< 1.17'
 
 group :jekyll_plugins do
   gem 'jekyll-archives', '2.1.1'

@@ -1,3 +1,9 @@
+- name: VMAP
+  link: /VMAP/
+- name: Cokecan
+  link: /Cokecan/
+- name: GEVIBench
+  link: https://gevibench.org 
 - name: PhD work
   sublinks:
     - name: TACO
@@ -6,5 +12,4 @@
       link: /gDMD-SIM/
     - name: Snapshot-MD-SIM
       link: /Snapshot-MD-SIM/
-- name: VMAP
-  link: /VMAP/
+

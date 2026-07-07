@@ -1,0 +1,82 @@
+---
+title: Cokecan
+description: An ultra-high-throughput imaging platform for all-optical electrophysiology.
+image: /photos/Cokecan_main.jpeg
+---
+
+<style>
+	/* Cokecan hero: title/subtitle are ALWAYS right-aligned and pushed to the right.
+	   As the viewport narrows they simply move inward and shrink so nothing is clipped;
+	   only the size of the right-hand gap changes with width. */
+	.hero.cokecan-hero .inner-hero {
+		max-width: none;          /* let the block reach the right edge on wide screens */
+		width: 100%;
+	}
+	.hero.cokecan-hero .hero-text-container {
+		width: auto;
+		max-width: 600px;         /* shrinks to fit instead of a fixed 600px overflow */
+		margin-left: auto;        /* always pushed to the right */
+		margin-right: 20px;       /* small gap on narrow screens (keeps it on-screen) */
+		text-align: right;        /* always right-aligned */
+	}
+	@media (min-width: 768px) {
+		.hero.cokecan-hero .hero-text-container {
+			margin-right: 150px;  /* larger gap on wide screens */
+			position: relative;
+			top: 70px;            /* nudge downward */
+		}
+	}
+</style>
+
+<section class="hero cokecan-hero" style="background-image: url({% include relative-src.html src=page.image %})">
+	<div class="inner-hero text-container">
+		<div class="hero-text-container">
+			<h1 class="editable">Cokecan</h1>
+			<p class="subtext editable">An ultra-high-throughput imaging platform for all-optical electrophysiology.</p>
+			<!-- TODO: add VMAP paper link when available
+			<p class="subtext editable"><a href="/papers/VMAP.pdf">Read full paper</a></p>
+			-->
+		</div>
+	</div>
+	<div class="learn-more"><a href="#learn-more">learn more <span class="arrow">&#x25BC;</span></a></div>
+</section>
+
+<div class="content">
+	<section class="info" id="learn-more">
+		<div class="container flex">
+			<div class="text">
+				<h2 class="editable">High-throughput platform for optical electrophysiology</h2>
+				<ul class='editable'>
+							<li>2.3× magnification, 0.5 NA</li>
+							<li>Single-cell resolution (~2.8 µm/pixel)</li>
+							<li>DMD-patterned illumination</li>
+							<li>1 kHz frame rate for 6×6 mm at 8-bit depth</li>
+							<li>~90% excitation uniformity across 6 mm</li>
+							<li>Three-color excitation (red, blue, UV)</li>							
+				</ul>
+				<!-- <p class="editable">Figure: TODO caption.</p> -->
+			</div>
+			<div class="image">
+				<video autoplay loop muted playsinline style="max-width: 100%; max-height: 650px;">
+					<source src="/photos/Cokecan_cad.mp4" type="video/mp4">
+				</video>
+			</div>
+		</div>
+	</section>
+
+	<section class="info">
+		<div class="container flex">
+			<div class="text">
+				<h2 class="editable">Screening thousands of cells</h2>
+				<p class="editable">The high-throughput design and patterned illumination enable Cokecan to perform perturb-and-observe measurements, screening thousands of cells simultaneously.</p>
+				<p class="editable">Figure: Simultaneous optical electrophysiology recording from thousands of neurons at an 800 Hz frame rate.</p>
+			</div>
+			<div class="image">
+				<video autoplay loop muted playsinline style="max-width: 100%; max-height: 650px;">
+					<source src="/photos/Cokecan_spike.mp4" type="video/mp4">
+				</video>
+			</div>
+		</div>
+	</section>
+
+

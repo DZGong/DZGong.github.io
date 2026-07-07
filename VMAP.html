@@ -1,14 +1,26 @@
 ---
 title: VMAP
-description: Voltage mapping by activated photocycle.
-image: /photos/TACO_cell.jpg
+description: A simple method for absolute voltage mapping using dynamic photocycle control.
+image: /photos/VMAP_wholefish.jpg
 ---
 
-<section class="hero" style="background-image: url({% include relative-src.html src=page.image %})">
+<style>
+	/* Narrow/portrait screens crop the wide landscape fish badly. Below this width,
+	   swap to a 90°-rotated (portrait) copy so more of the whole fish is visible.
+	   !important is needed to override the inline background-image below. */
+	@media (max-width: 700px) {
+		.hero.vmap-hero {
+			background-image: url('/photos/VMAP_wholefish_vertical.jpg') !important;
+		}
+	}
+</style>
+
+<section class="hero vmap-hero" style="background-image: url({% include relative-src.html src=page.image %})">
 	<div class="inner-hero text-container">
 		<div class="hero-text-container">
 			<h1 class="editable">VMAP</h1>
-			<p class="subtext editable">Voltage Mapping by Activated Photocycle (VMAP).</p>
+			<p class="subtext editable">A simple method for absolute voltage mapping using dynamic photocycle control.</p>
+			<p class="subtext editable"><a href="/papers/Poster_GRC_small.pdf">Read poster summary</a></p>
 			<!-- TODO: add VMAP paper link when available
 			<p class="subtext editable"><a href="/papers/VMAP.pdf">Read full paper</a></p>
 			-->
@@ -19,15 +31,81 @@ image: /photos/TACO_cell.jpg
 
 <div class="content">
 	<section class="info" id="learn-more">
-		<div class="container flex">
-			<div class="text">
-				<h2 class="editable">VMAP overview</h2>
-				<p class='editable'>TODO: describe the VMAP method here.</p>
-				<p class="editable">Figure: TODO caption.</p>
+		<style>
+			/* Section 1: principle figure + patch-clamp video side by side; stacks on narrow screens. */
+			.vmap-s1-media {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 30px;
+				align-items: flex-start;
+				justify-content: center;
+				margin-top: 24px;
+			}
+			.vmap-s1-item {
+				flex: 1 1 360px;      /* two columns when there's room, stack when narrow */
+				max-width: 560px;
+				min-width: 0;
+				margin: 0;
+			}
+			.vmap-s1-item > img { 
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+			.vmap-s1-item figcaption {
+				margin-top: 12px;
+				font-size: 1.38em;               /* match the section description text size */
+				font-family: 'Lato', sans-serif;
+				font-weight: 300;
+				line-height: 1.6em;
+				text-align: center;
+			}
+			/* patch-clamp video shown at 70% of its column width, centered */
+			.vmap-s1-media .video-scrub {
+				width: 60%;
+				margin: 0 auto;
+			}
+		</style>
+		<div class="container">
+			<div class="text center-text">
+				<h2 class="editable">VMAP: Voltage mapping by activated photocycle</h2>
+				<p class='editable'>Conventional voltage imaging only probes voltage fluctuations and cannot measure the absolute value of membrane potentials. VMAP achieves absolute voltage imaging by using a brief illumination pulse to probe the voltage-insensitive fluorescence (Fᵢ) as an internal reference to normalize the voltage measurement signal Fᵥ. The normalized signal Rᵥ = Fᵥ/Fᵢ serves as a robust metric for absolute membrane potential values with ~7 mV precision.</p>
 			</div>
-			<div class="image">
-				<!-- TODO: replace with a VMAP figure -->
-				<img class="editable" src="/photos/TACO_setup.jpg" alt="VMAP_setup" />
+			<div class="vmap-s1-media">
+				<figure class="vmap-s1-item">
+					<img src="/photos/VMAP_principle.svg" alt="VMAP principle">
+					<figcaption>Principle of VMAP</figcaption>
+				</figure>
+				<figure class="vmap-s1-item">
+					<div class="video-scrub">
+						<video playsinline muted preload="auto">
+							<source src="/photos/VMAP_patchclamp.mp4" type="video/mp4">
+						</video>
+						<input class="video-scrub-range" type="range" min="0" max="1" step="any" value="0" aria-label="Scrub through the patch-clamp video">
+					</div>
+					<script>
+						(function () {
+							var wrap = document.currentScript.previousElementSibling;
+							var video = wrap.querySelector('video');
+							var range = wrap.querySelector('.video-scrub-range');
+							function syncMax() {
+								if (video.duration && isFinite(video.duration)) { range.max = video.duration; }
+							}
+							video.addEventListener('loadedmetadata', syncMax);
+							if (video.readyState >= 1) syncMax();
+							video.addEventListener('loadeddata', function () {
+								if (video.currentTime === 0) { try { video.currentTime = 0.0001; } catch (e) {} }
+							});
+							range.addEventListener('input', function () {
+								video.pause();
+								if (video.duration) {
+									video.currentTime = Math.min(parseFloat(range.value), video.duration - 0.001);
+								}
+							});
+						})();
+					</script>
+					<figcaption>Patch-clamp validation of VMAP</figcaption>
+				</figure>
 			</div>
 		</div>
 	</section>
@@ -35,13 +113,88 @@ image: /photos/TACO_cell.jpg
 	<section class="info">
 		<div class="container flex">
 			<div class="text">
-				<h2 class="editable">Section 2</h2>
-				<p class="editable">TODO: VMAP content.</p>
-				<p class="editable">Figure: TODO caption.</p>
+				<h2 class="editable">Absolute voltage, absolutely simple</h2>
+				<p class="editable">Without relying on any specialized hardware or multi-labeling, the only requirement for performing VMAP is to turn light on and off at the sub-millisecond scale. This means VMAP can be readily integrated into regular voltage imaging systems and can flexibly accommodate other imaging modalities, such as optogenetics or calcium imaging.</p>
+				<p class="editable">Figure: VMAP traces of neurons under optogenetic stimulation.</p>
 			</div>
 			<div class="image">
-				<!-- TODO: replace with a VMAP figure -->
-				<img class="editable" src="/photos/TACO_conjugate.gif" alt="VMAP_figure" />
+				<style>
+					/* Play/pause button + progress slider row for the autoplaying neuron video. */
+					.video-scrub-controls {
+						display: flex;
+						align-items: center;
+						gap: 12px;
+						margin-top: 14px;
+					}
+					.video-scrub-controls .video-scrub-range {
+						margin-top: 0;        /* the row already supplies top spacing */
+						flex: 1 1 auto;
+					}
+					.video-scrub-btn {
+						flex: 0 0 auto;
+						width: 40px;
+						height: 40px;
+						padding: 0;
+						border: 0;
+						border-radius: 50%;
+						background: #6ba1f3;
+						color: #fff;
+						font-size: 15px;
+						line-height: 1;
+						cursor: pointer;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+					.video-scrub-btn:hover { background: #5a90e2; }
+				</style>
+				<!-- Autoplaying video with a play/pause button and a progress slider.
+				     Dragging the slider pauses playback and follows the drag; only the button resumes it. -->
+				<div class="video-scrub" style="width: 100%; margin: 0;">
+					<video autoplay loop muted playsinline preload="auto">
+						<source src="/photos/VMAP_neuron.mp4" type="video/mp4">
+					</video>
+					<div class="video-scrub-controls">
+						<button type="button" class="video-scrub-btn" aria-label="Play or pause the video">&#9208;</button>
+						<input class="video-scrub-range" type="range" min="0" max="1" step="any" value="0" aria-label="Video progress — drag to seek">
+					</div>
+				</div>
+				<script>
+					(function () {
+						var wrap = document.currentScript.previousElementSibling;
+						var video = wrap.querySelector('video');
+						var range = wrap.querySelector('.video-scrub-range');
+						var btn = wrap.querySelector('.video-scrub-btn');
+						var scrubbing = false;
+						function syncMax() {
+							if (video.duration && isFinite(video.duration)) { range.max = video.duration; }
+						}
+						video.addEventListener('loadedmetadata', syncMax);
+						if (video.readyState >= 1) syncMax();
+						// slider follows playback smoothly (timeupdate only fires ~4x/sec, which looks jumpy)
+						function tick() {
+							if (!scrubbing && video.duration) { range.value = video.currentTime; }
+							requestAnimationFrame(tick);
+						}
+						requestAnimationFrame(tick);
+						// play/pause button reflects and toggles the video state (▶ play / ⏸ pause)
+						function updateBtn() { btn.innerHTML = video.paused ? '&#9654;' : '&#9208;'; }
+						video.addEventListener('play', updateBtn);
+						video.addEventListener('pause', updateBtn);
+						updateBtn();
+						btn.addEventListener('click', function () {
+							if (video.paused) { video.play(); } else { video.pause(); }
+						});
+						// Dragging pauses autoplay and fully follows the drag; playback resumes only via the button.
+						range.addEventListener('pointerdown', function () { scrubbing = true; video.pause(); });
+						range.addEventListener('input', function () {
+							if (video.duration) { video.currentTime = parseFloat(range.value); }
+						});
+						function endScrub() { scrubbing = false; }   // stay paused; button resumes
+						range.addEventListener('pointerup', endScrub);
+						range.addEventListener('change', endScrub);
+					})();
+				</script>
 			</div>
 		</div>
 	</section>
@@ -49,47 +202,206 @@ image: /photos/TACO_cell.jpg
 	<section class="info">
 		<div class="container flex">
 			<div class="text">
-				<h2 class="editable">Section 3</h2>
-				<p class="editable">TODO: VMAP content.</p>
-				<p class="editable">Figure: TODO caption.</p>
+				<h2 class="editable">See voltage at scale</h2>
+				<p class="editable">Compared to electrode-based electrophysiology methods, the optical imaging nature of VMAP makes it able to perform voltage measurements over large areas, for long times, and non-invasively; thus, the throughput can be expanded by orders of magnitude.</p>
+				<p class="editable">Figure: VMAP of hiPSC colonies across millimeter-scale areas, showing distinct voltage spatial domains that match pluripotency markers.</p>
 			</div>
 			<div class="image">
-				<!-- TODO: replace with a VMAP figure -->
-				<img class="editable" src="/photos/TACO_pupil.gif" alt="VMAP_figure" />
+				<style>
+					/* Before/after comparison slider: two stacked images with a draggable divider. */
+					.img-compare {
+						position: relative;
+						width: 100%;
+						max-width: 600px;
+						margin: 0 auto;
+						aspect-ratio: 1 / 1;      /* both images are square */
+						overflow: hidden;
+						cursor: ew-resize;
+						touch-action: none;       /* let drag work without page-scrolling */
+						user-select: none;
+						-webkit-user-select: none;
+						--pos: 50%;                /* divider position, updated by JS */
+					}
+					.img-compare img {
+						position: absolute;
+						inset: 0;
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						display: block;
+						pointer-events: none;
+					}
+					.img-compare .img-compare-top {
+						/* reveal only the left `--pos` of the top image */
+						clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+					}
+					.img-compare .img-compare-handle {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: var(--pos);
+						width: 2px;
+						margin-left: -1px;
+						background: #fff;
+						box-shadow: 0 0 4px rgba(0, 0, 0, .5);
+						pointer-events: none;
+					}
+					.img-compare .img-compare-grip {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						width: 38px;
+						height: 38px;
+						transform: translate(-50%, -50%);
+						border-radius: 50%;
+						background: #fff;
+						box-shadow: 0 0 6px rgba(0, 0, 0, .45);
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						color: #333;
+						font-size: 18px;
+						line-height: 1;
+					}
+					.img-compare .img-compare-label {
+						position: absolute;
+						bottom: 10px;
+						padding: 3px 8px;
+						font-size: 12px;
+						color: #fff;
+						background: rgba(0, 0, 0, .55);
+						border-radius: 3px;
+						pointer-events: none;
+					}
+					.img-compare .img-compare-label.left { left: 10px; }
+					.img-compare .img-compare-label.right { right: 10px; }
+				</style>
+				<div class="img-compare">
+					<img src="/photos/VMAP_oct4.jpg" alt="Oct4">
+					<img class="img-compare-top" src="/photos/VMAP_stemV.jpg" alt="StemV">
+					<!-- <span class="img-compare-label left">StemV</span>
+					<span class="img-compare-label right">Oct4</span> -->
+					<div class="img-compare-handle"><span class="img-compare-grip">&#8596;</span></div>
+				</div>
+				<script>
+					(function () {
+						var el = document.currentScript.previousElementSibling;
+						function setPos(clientX) {
+							var rect = el.getBoundingClientRect();
+							var pct = ((clientX - rect.left) / rect.width) * 100;
+							el.style.setProperty('--pos', Math.max(0, Math.min(100, pct)) + '%');
+						}
+						var dragging = false;
+						el.addEventListener('pointerdown', function (e) { dragging = true; el.setPointerCapture(e.pointerId); setPos(e.clientX); });
+						el.addEventListener('pointermove', function (e) { if (dragging) setPos(e.clientX); });
+						el.addEventListener('pointerup', function () { dragging = false; });
+						el.addEventListener('pointercancel', function () { dragging = false; });
+					})();
+				</script>
 			</div>
 		</div>
 	</section>
 
 	<section class="info">
-		<div class="container flex">
-			<div class="text">
-				<h2 class="editable">Section 4</h2>
-				<p class="editable">TODO: VMAP content.</p>
-				<p class="editable">Figure: TODO caption.</p>
-			</div>
-			<div class="image">
-				<!-- TODO: replace with a VMAP figure -->
-				<img class="editable" src="/photos/TACO_cell.gif" alt="VMAP_figure" />
+		<div class="container">
+			<div class="text center-text">
+				<h2 class="editable">MAP the uncharted</h2>
+				<p class="editable">VMAP has been demonstrated across rodent, human, and fish cells; across isolated cells, cell assemblies, and intact animals; and across timescales from millisecond neuronal activity to days-long changes in resting potential. The ability to map absolute voltage across scales enables studies of bioelectrical activity that were previously inaccessible.</p>
+				<p class="editable">Figure: 3D-VMAP of a whole 24 hpf zebrafish embryo showing distinct voltage patterns.</p>
 			</div>
 		</div>
+		<style>
+			/* Scrubbable video: no autoplay — drag the bar to step through the frames. */
+			.video-scrub {
+				width: 70%;
+				margin: 0 auto;
+			}
+			.video-scrub video {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+			.video-scrub-range {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 100%;
+				height: 6px;
+				margin-top: 14px;
+				border-radius: 3px;
+				background: #ddd;
+				cursor: pointer;
+			}
+			.video-scrub-range::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				background: #6ba1f3;
+				border: 2px solid #fff;
+				box-shadow: 0 0 3px rgba(0, 0, 0, .4);
+			}
+			.video-scrub-range::-moz-range-thumb {
+				width: 18px;
+				height: 18px;
+				border: 2px solid #fff;
+				border-radius: 50%;
+				background: #6ba1f3;
+			}
+		</style>
+		<div class="video-scrub">
+			<video autoplay loop muted playsinline preload="auto">
+				<source src="/photos/VMAP_fish.mp4" type="video/mp4">
+			</video>
+			<div class="video-scrub-controls">
+				<button type="button" class="video-scrub-btn" aria-label="Play or pause the video">&#9208;</button>
+				<input class="video-scrub-range" type="range" min="0" max="1" step="any" value="0" aria-label="Video progress — drag to seek">
+			</div>
+		</div>
+		<script>
+			(function () {
+				var wrap = document.currentScript.previousElementSibling;
+				var video = wrap.querySelector('video');
+				var range = wrap.querySelector('.video-scrub-range');
+				var btn = wrap.querySelector('.video-scrub-btn');
+				var scrubbing = false;
+				// Play the fish at 1/3 speed (3x slower). Reassert on load in case the browser resets it.
+				var RATE = 1 / 3;
+				video.playbackRate = RATE;
+				video.addEventListener('loadedmetadata', function () { video.playbackRate = RATE; });
+				video.addEventListener('play', function () { video.playbackRate = RATE; });
+				function syncMax() {
+					if (video.duration && isFinite(video.duration)) { range.max = video.duration; }
+				}
+				video.addEventListener('loadedmetadata', syncMax);
+				if (video.readyState >= 1) syncMax();
+				// slider follows playback smoothly (timeupdate only fires ~4x/sec, which looks jumpy)
+				function tick() {
+					if (!scrubbing && video.duration) { range.value = video.currentTime; }
+					requestAnimationFrame(tick);
+				}
+				requestAnimationFrame(tick);
+				// play/pause button reflects and toggles the video state (▶ play / ⏸ pause)
+				function updateBtn() { btn.innerHTML = video.paused ? '&#9654;' : '&#9208;'; }
+				video.addEventListener('play', updateBtn);
+				video.addEventListener('pause', updateBtn);
+				updateBtn();
+				btn.addEventListener('click', function () {
+					if (video.paused) { video.play(); } else { video.pause(); }
+				});
+				// Dragging pauses autoplay and fully follows the drag; playback resumes only via the button.
+				range.addEventListener('pointerdown', function () { scrubbing = true; video.pause(); });
+				range.addEventListener('input', function () {
+					if (video.duration) { video.currentTime = parseFloat(range.value); }
+				});
+				function endScrub() { scrubbing = false; }   // stay paused; button resumes
+				range.addEventListener('pointerup', endScrub);
+				range.addEventListener('change', endScrub);
+			})();
+		</script>
 	</section>
 </div>
 
 
-
-<!-- <section class="pad">
-	<div class="container">
-		<p class="editor-link"><a href="cloudcannon:collections/_staff_members" class="btn"><strong>&#9998;</strong> Manage Staff Members</a></p>
-		<ul class="staff">
-			{% for person in site.staff_members %}
-				<li>
-					<div class="square-image" style="background-image: url({% include relative-src.html src=person.image_path %})"></div>
-					<div class="name"><a target="_blank" href="https://twitter.com/{{ person.twitter_username }}">{{ person.name }}</a></div>
-					<div class="position">{{ person.position }}</div>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
-</section> -->
 
 
